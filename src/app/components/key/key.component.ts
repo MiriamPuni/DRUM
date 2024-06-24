@@ -28,7 +28,7 @@ export class KeyComponent implements OnInit, OnDestroy {
   constructor( private audioService : AudioService){
     this.keyDown$ = fromEvent(document, 'keypress').pipe(
       map(data=>data as KeyboardEvent),
-      filter(data=>data.key === this.sound.key),
+      filter(data=>data.key.toLocaleLowerCase() === this.sound.key),
       tap(data=>{
       audioService.playSound(this.sound.sound)
       this.isPlaying = true
